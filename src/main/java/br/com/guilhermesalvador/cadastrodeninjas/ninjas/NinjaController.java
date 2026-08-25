@@ -1,4 +1,4 @@
-package br.com.guilhermesalvador.cadastrodeninjas;
+package br.com.guilhermesalvador.cadastrodeninjas.ninjas;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,5 +1,6 @@
-package br.com.guilhermesalvador.cadastrodeninjas;
+package br.com.guilhermesalvador.cadastrodeninjas.ninjas;
 
+import br.com.guilhermesalvador.cadastrodeninjas.missoes.MissaoModel;
 import jakarta.persistence.*;
 
 // Entity transforma uma classe em uma entidade do Banco de Dados
@@ -14,6 +15,11 @@ public class NinjaModel {
     private String nome;
     private String email;
     private int idade;
+    // @ManyToOne - "muitos" ninjas estao relacionados a "uma" missao
+    @ManyToOne
+    @JoinColumn(name = "missao_id") // Foreign Key
+    private MissaoModel missao;
+
 
     public NinjaModel() {
     }
