@@ -1,6 +1,7 @@
 package br.com.guilhermesalvador.cadastrodeninjas.missoes;
 
 import br.com.guilhermesalvador.cadastrodeninjas.ninjas.NinjaModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class MissaoModel {
 
     // @OneToMany - "uma" missão esta relacionada a "muitos" ninjas
     @OneToMany(mappedBy = "missao")
+    @JsonIgnore
     private List<NinjaModel> ninjas;
 
 }
