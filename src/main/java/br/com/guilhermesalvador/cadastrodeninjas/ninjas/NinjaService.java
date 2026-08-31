@@ -3,6 +3,7 @@ package br.com.guilhermesalvador.cadastrodeninjas.ninjas;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NinjaService {
@@ -16,5 +17,12 @@ public class NinjaService {
     // Listar os ninjas
     public List<NinjaModel> listarNinjas() {
         return ninjaRepository.findAll();
+    }
+
+    // Listar ninja por ID
+    public NinjaModel listarNinjaPorId(Long id) {
+        Optional<NinjaModel> ninja = ninjaRepository.findById(id);
+
+        return ninja.orElse(null);
     }
 }
