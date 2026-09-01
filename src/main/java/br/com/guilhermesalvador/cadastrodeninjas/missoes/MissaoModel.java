@@ -24,8 +24,6 @@ public class MissaoModel {
 
     private String descricao;
 
-    private char rank;
-
     // @OneToMany - "uma" missão esta relacionada a "muitos" ninjas
     @OneToMany(mappedBy = "missao")
     @JsonIgnore
