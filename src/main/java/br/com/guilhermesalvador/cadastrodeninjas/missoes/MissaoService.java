@@ -29,6 +29,7 @@ public class MissaoService {
         return missaoRepository.findById(id).orElse(null);
     }
 
+    // Atualizar uma missão
     public MissaoModel atualizarMissao(Long id, MissaoModel missao) {
         if (missaoRepository.existsById(id)) {
             missao.setId(id);
@@ -36,6 +37,11 @@ public class MissaoService {
         }
 
         return null;
+    }
+
+    // Deletar uma missão
+    public void deletarMissao(Long id) {
+        missaoRepository.deleteById(id);
     }
 
 }
