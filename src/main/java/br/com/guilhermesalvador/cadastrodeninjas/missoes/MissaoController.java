@@ -2,6 +2,8 @@ package br.com.guilhermesalvador.cadastrodeninjas.missoes;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/missoes")
 public class MissaoController {
@@ -18,8 +20,13 @@ public class MissaoController {
     }
 
     @GetMapping("/listar")
-    public String listarMissoes() {
-        return "Missoes listadas com sucesso";
+    public List<MissaoModel> listarMissoes() {
+        return missaoService.listarMissoes();
+    }
+
+    @GetMapping("/listar/{id}")
+    public MissaoModel listarMissaoPorId(@PathVariable Long id) {
+        return missaoService.listarMissaoPorId(id);
     }
 
     @PutMapping("/alterar")

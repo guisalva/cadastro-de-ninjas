@@ -3,6 +3,8 @@ package br.com.guilhermesalvador.cadastrodeninjas.missoes;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Service
 public class MissaoService {
 
@@ -15,6 +17,16 @@ public class MissaoService {
     // Criar Missão
     public MissaoModel criarMissao(MissaoModel missao) {
         return missaoRepository.save(missao);
+    }
+
+    // Listar todas as missões
+    public List<MissaoModel> listarMissoes() {
+        return missaoRepository.findAll();
+    }
+
+    // Listar missão por ID
+    public MissaoModel listarMissaoPorId(Long id) {
+        return missaoRepository.findById(id).orElse(null);
     }
 
 }
