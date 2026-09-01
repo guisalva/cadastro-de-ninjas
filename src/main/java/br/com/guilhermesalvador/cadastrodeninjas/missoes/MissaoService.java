@@ -29,4 +29,13 @@ public class MissaoService {
         return missaoRepository.findById(id).orElse(null);
     }
 
+    public MissaoModel atualizarMissao(Long id, MissaoModel missao) {
+        if (missaoRepository.existsById(id)) {
+            missao.setId(id);
+            return missaoRepository.save(missao);
+        }
+
+        return null;
+    }
+
 }
