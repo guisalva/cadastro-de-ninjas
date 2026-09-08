@@ -5,14 +5,16 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 // Entity transforma uma classe em uma entidade do Banco de Dados
 // JPA = Java Persistence API
 @Entity
 @Table(name = "tb_cadastro")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@ToString(exclude = "missao")
 public class NinjaModel {
 
     @Id
