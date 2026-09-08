@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar Ninja</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .form-card {
+            background-color: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 35px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #dcdfe3;
+            border-radius: 7px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fff;
+            outline: none;
+            transition: border-color 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #555;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn-cancel {
+            background-color: #f0f2f4;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background-color: #dfe3e6;
+        }
+
+        .btn-save {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .btn-save:hover {
+            background-color: #444;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Criar Novo Ninja</h1>
+        <p>Preencha as informações abaixo para cadastrar um novo ninja.</p>
+    </div>
+
+    <div class="form-card">
+
+        <form
+                th:action="@{/ninjas/ui/salvar}"
+                th:object="${ninja}"
+                method="post">
+
+            <!-- Nome -->
+            <div class="form-group">
+                <label for="nome">
+                    Nome
+                </label>
+
+                <input
+                        type="text"
+                        id="nome"
+                        th:field="*{nome}"
+                        placeholder="Digite o nome do ninja"
+                        required
+                >
+            </div>
+
+            <!-- Idade e Rank -->
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="idade">
+                        Idade
+                    </label>
+
+                    <input
+                            type="number"
+                            id="idade"
+                            th:field="*{idade}"
+                            placeholder="Ex: 18"
+                            min="1"
+                            required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="rank">
+                        Rank
+                    </label>
+
+                    <input
+                            type="text"
+                            id="rank"
+                            th:field="*{rank}"
+                            placeholder="Ex: Genin"
+                            required
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- E-mail -->
+            <div class="form-group">
+
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                        type="email"
+                        id="email"
+                        th:field="*{email}"
+                        placeholder="exemplo@email.com"
+                        required
+                >
+
+            </div>
+
+            <!-- URL da imagem -->
+            <div class="form-group">
+
+                <label for="imgUrl">
+                    URL da imagem
+                </label>
+
+                <input
+                        type="url"
+                        id="imgUrl"
+                        th:field="*{imgUrl}"
+                        placeholder="https://exemplo.com/imagem.jpg"
+                >
+
+            </div>
+
+            <!-- Botões -->
+            <div class="form-actions">
+
+                <a
+                        th:href="@{/ninjas/ui/listar}"
+                        class="btn btn-cancel">
+                    Cancelar
+                </a>
+
+                <button
+                        type="submit"
+                        class="btn btn-save">
+                    Cadastrar Ninja
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalhes do Ninja</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .profile-card {
+            background-color: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .profile-content {
+            display: flex;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .image-section {
+            width: 280px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .ninja-image {
+            width: 240px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 3px solid #eee;
+        }
+
+        .info-section {
+            flex: 1;
+        }
+
+        .ninja-name {
+            font-size: 28px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .rank {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background-color: #eef2f5;
+            color: #444;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .info-item {
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            display: block;
+            color: #888;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 15px;
+        }
+
+        .mission-section {
+            border-top: 1px solid #eee;
+            padding: 30px 40px;
+            background-color: #fafafa;
+        }
+
+        .mission-title {
+            font-size: 18px;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .mission-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .mission-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .mission-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .no-mission {
+            color: #999;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            padding: 25px 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .btn-back {
+            background-color: #f0f2f4;
+            color: #333;
+        }
+
+        .btn-back:hover {
+            background-color: #dfe3e6;
+        }
+
+        .btn-edit {
+            background-color: #e8f0fe;
+            color: #2563eb;
+        }
+
+        .btn-edit:hover {
+            background-color: #d5e4fd;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .profile-content {
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 20px;
+            }
+
+            .image-section {
+                width: 100%;
+            }
+
+            .ninja-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .info-section {
+                width: 100%;
+            }
+
+            .ninja-name {
+                font-size: 24px;
+            }
+
+            .mission-section,
+            .actions {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Detalhes do Ninja</h1>
+        <p>Confira todas as informações deste ninja.</p>
+    </div>
+
+    <div class="profile-card">
+
+        <div class="profile-content">
+
+            <!-- Imagem -->
+            <div class="image-section">
+
+                <img
+                        class="ninja-image"
+                        th:src="${ninja.imgUrl}"
+                        th:alt="${ninja.nome}"
+                >
+
+            </div>
+
+            <!-- Informações -->
+            <div class="info-section">
+
+                <h2
+                        class="ninja-name"
+                        th:text="${ninja.nome}">
+                    Nome do Ninja
+                </h2>
+
+                <span
+                        class="rank"
+                        th:text="${ninja.rank}">
+                    Rank
+                </span>
+
+                <div class="info-list">
+
+                    <div class="info-item">
+                        <span class="info-label">ID</span>
+                        <span
+                                class="info-value"
+                                th:text="${ninja.id}">
+                            1
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Idade</span>
+                        <span
+                                class="info-value"
+                                th:text="${ninja.idade}">
+                            20
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">E-mail</span>
+                        <span
+                                class="info-value"
+                                th:text="${ninja.email}">
+                            ninja@email.com
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Missão -->
+        <div class="mission-section">
+
+            <h3 class="mission-title">
+                Missão atual
+            </h3>
+
+            <div
+                    class="mission-card"
+                    th:if="${ninja.missao != null}">
+
+                <div
+                        class="mission-name"
+                        th:text="${ninja.missao.nome}">
+                    Nome da missão
+                </div>
+
+                <div class="mission-description">
+
+                    <span>Descrição: </span>
+
+                    <span
+                            th:text="${ninja.missao.descricao}">
+                        Descrição da missão
+                    </span>
+
+                </div>
+
+            </div>
+
+            <span
+                    class="no-mission"
+                    th:if="${ninja.missao == null}">
+                Este ninja não possui nenhuma missão cadastrada.
+            </span>
+
+        </div>
+
+        <!-- Botões -->
+        <div class="actions">
+
+            <a
+                    href="/ninjas/ui/listar"
+                    class="btn btn-back">
+                ← Voltar
+            </a>
+
+            <a
+                    href="#"
+                    class="btn btn-edit">
+                Editar Ninja
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
